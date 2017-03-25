@@ -38,7 +38,7 @@ static final String TAG = "bleController";
     }
 
 
-    public void connectBLEController(String sensorKind) {
+    public void connectBLEController(String options) {
         Log.d(TAG, "Register bleManager callback");
         bleManager.registerCallback(callback);
         Log.d(TAG, "Connect to Ble");
@@ -58,17 +58,17 @@ static final String TAG = "bleController";
     BluetoothLeUart.Callback callback = new BluetoothLeUart.Callback() {
         @Override
         public void onConnected(BluetoothLeUart uart) {
-
+            UnityPlayer.UnitySendMessage("BleController", "BleStatus", "connected");
         }
 
         @Override
         public void onConnectFailed(BluetoothLeUart uart) {
-
+            UnityPlayer.UnitySendMessage("BleController", "BleStatus", "failed");
         }
 
         @Override
         public void onDisconnected(BluetoothLeUart uart) {
-
+            UnityPlayer.UnitySendMessage("BleController", "BleStatus", "disconnected");
         }
 
         @Override
